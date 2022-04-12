@@ -1,0 +1,1 @@
+body{background-color:#272b30;font:100% Helvetica,sans-serif}.sudokuCellDiv{background-color:#fff;border:1px solid gray;color:green;font-weight:700;padding-top:5px}.sudokuCell,.sudokuCellDiv{float:left;height:30px;text-align:center;width:30px}input.sudokuCell{color:green;font-weight:700}.sudokuRow{display:flex;justify-content:center;min-width:300px;overflow:hidden}
