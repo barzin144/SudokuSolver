@@ -73,7 +73,7 @@ const App = () => {
   };
 
   const solveIt = () => {
-    const unSolved = sudoku.map((row, rowIndex) => {
+    const unSolved = sudoku.map((row) => {
       return [...row];
     });
     setUnSolvedSudoku(unSolved);
@@ -127,15 +127,21 @@ const App = () => {
 
   const puzzle = sudoku.map((row, rowIndex) => {
     const cols = row.map((col, colIndex) => {
-      return (
-        <input
-          type={"text"}
+      return startSolve.solved ? (
+        <div
           style={{
             color:
               unSolvedSudoku[rowIndex][colIndex] === sudoku[rowIndex][colIndex] ? "black" : "green",
           }}
+          className={`sudokuCellDiv ${colIndex % 3 == 2 ? "mr-1" : ""}`}
+          key={`row${rowIndex + 1}-col${colIndex + 1}`}
+        >
+          {sudoku[rowIndex][colIndex]}
+        </div>
+      ) : (
+        <input
+          type={"text"}
           className={`sudokuCell ${colIndex % 3 == 2 ? "mr-1" : ""}`}
-          readOnly={startSolve.solved}
           maxLength={1}
           autoComplete={"off"}
           key={`row${rowIndex + 1}-col${colIndex + 1}`}
@@ -152,36 +158,16 @@ const App = () => {
     );
   });
 
-  const unSolvedPuzzle = unSolvedSudoku.map((row, rowIndex) => {
-    const cols = row.map((col, colIndex) => {
-      return (
-        <div
-          className={`sudokuCellDiv ${colIndex % 3 == 2 ? "mr-1" : ""}`}
-          key={`row${rowIndex + 1}-col${colIndex + 1}`}
-        >
-          {unSolvedSudoku[rowIndex][colIndex] != 0 ? unSolvedSudoku[rowIndex][colIndex] : ""}
-        </div>
-      );
-    });
-
-    return (
-      <div className={`sudokuRow ${rowIndex % 3 == 2 ? "mb-1" : ""}`} key={`row${rowIndex + 1}`}>
-        {cols}
-      </div>
-    );
-  });
-
   return (
     <div className="mt-5 d-flex flex-column align-items-center">
       <div>
-        <form>{startSolve.start ? unSolvedPuzzle : puzzle}</form>
+        <form>{puzzle}</form>
       </div>
       {startSolve.solved && (
         <div className="alert alert-success text-center mt-2" role="alert">
           Solved
         </div>
       )}
-      {startSolve.solved && <div>{puzzle}</div>}
       <div className="mt-2 text-center">
         {unSolveable && (
           <div className="alert alert-danger text-center" role="alert">
