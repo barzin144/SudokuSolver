@@ -1,43 +1,37 @@
 module.exports = {
   entry: {
-    main: './src/index.js'
+    main: "./src/index.tsx",
   },
   module: {
     rules: [
       {
         test: /\.html$/,
-        use: ['html-loader']
+        use: ["html-loader"],
       },
       {
         test: /\.(svg|png|jpg|gif)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[hash].[ext]',
-            outputPath: 'imgs'
-          }
-        }
+        type: "asset/resource",
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts'
-            }
-          }
-        ]
+              name: "[name].[ext]",
+              outputPath: "fonts",
+            },
+          },
+        ],
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.tsx?$/,
+        loader: "ts-loader",
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
-      }
-    ]
-
-  }
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
 };

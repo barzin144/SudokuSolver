@@ -1,7 +1,8 @@
 # Sudoku Solver
+
 using recursive function
 
-- Webpack 4 _for module bundling_
+- Webpack 5 _for module bundling_
 
 [Live Demo](https://barzin144.github.io/SudokuSolver/)
 
